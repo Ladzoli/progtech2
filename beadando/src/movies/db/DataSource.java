@@ -10,9 +10,9 @@ import movies.db.controllers.BorrowController;
 
 public class DataSource {
     
-    private final String connectionUrl = "jdbc:derby://localhost:1527/movies.db";
-    private final String userName = "root";
-    private final String password = "root";
+    private final String connectionUrl = "jdbc:derby:resources/localdb;create=true";
+    //private final String userName = "root";
+    //private final String password = "root";
     
     private final BorrowController borrowController;
     private final MovieController movieController;
@@ -23,7 +23,15 @@ public class DataSource {
     }
     
     public Connection getConnection() throws SQLException{
-        return DriverManager.getConnection(connectionUrl, userName, password);
+        /*try
+        {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.out.println(e.toString());
+        }*/
+        return DriverManager.getConnection(connectionUrl);
     }
     
     public static DataSource getInstance(){

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class DatabaseSetup {
 
     public static void main(String[] args) {
-        final File file = new File("data.sql");
+        final File file = new File("resources/data.sql");
         System.out.println("Az SQL fájl feldolgozása elindult!");
         try (final Scanner scanner = new Scanner(file);
                 final Connection conn = DataSource.getInstance().getConnection();
