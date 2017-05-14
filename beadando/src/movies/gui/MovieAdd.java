@@ -56,21 +56,17 @@ public class MovieAdd extends JFrame {
         form.add(originalC);
         form.add(addto);
         
-        addto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                try{
-                    Boolean ori = originalC.getState();
-                    String orig = ori.toString();
-                    String[] data = {nameT.getText(),directorT.getText(),maincastT.getText(),yearT.getText(),orig};
-                    movieTableModel.addNewEntity(data);
-                 
-                    
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,  "Rossz/hiányzó bemeneti adat","Hiba", JOptionPane.ERROR_MESSAGE); 
-           
-                }
+        addto.addActionListener(e -> {
+            try{
+                Boolean ori = originalC.getState();
+                String orig = ori.toString();
+                String[] data = {nameT.getText(),directorT.getText(),maincastT.getText(),yearT.getText(),orig};
+                movieTableModel.addNewEntity(data);
+
+
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,  "Rossz/hiányzó bemeneti adat","Hiba", JOptionPane.ERROR_MESSAGE);
+
             }
         });
         

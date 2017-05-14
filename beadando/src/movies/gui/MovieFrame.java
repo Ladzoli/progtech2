@@ -91,7 +91,7 @@ public class MovieFrame extends JFrame {
                 if(isRowSelected(row)){
                     comp.setBackground(Color.LIGHT_GRAY);
                 }
-                
+                setVisible(true);
                 return comp;
             }
             
@@ -382,20 +382,17 @@ public class MovieFrame extends JFrame {
         
         
 
-        applyB2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableRowSorter sorter = new TableRowSorter(borrowTableModel);
-                List<RowFilter<MovieTableModel,Integer>> rfs = 
-                    new ArrayList<RowFilter<MovieTableModel,Integer>>(2);
-                rfs.add(RowFilter.regexFilter(titleT2.getText(), 2));
-                rfs.add(RowFilter.regexFilter(dateT2.getText(), 4));
-                RowFilter<MovieTableModel,Integer> af = RowFilter.andFilter(rfs);
-                sorter.setRowFilter(af);
-                borrowTable.setRowSorter(sorter);
-                
-            }
-        });    
+        applyB2.addActionListener(e -> {
+            TableRowSorter sorter = new TableRowSorter(borrowTableModel);
+            List<RowFilter<MovieTableModel,Integer>> rfs =
+                    new ArrayList<>(2);
+            rfs.add(RowFilter.regexFilter(titleT2.getText(), 2));
+            rfs.add(RowFilter.regexFilter(dateT2.getText(), 4));
+            RowFilter<MovieTableModel,Integer> af = RowFilter.andFilter(rfs);
+            sorter.setRowFilter(af);
+            borrowTable.setRowSorter(sorter);
+
+        });
         
         
         
@@ -419,7 +416,7 @@ public class MovieFrame extends JFrame {
         
         getContentPane().add(Bottom, BorderLayout.SOUTH);
         pack();
-
+        setVisible(true);
     }
 
     private void initFrameProperties() {
@@ -434,7 +431,15 @@ public class MovieFrame extends JFrame {
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-   
-   
-    
+    public MovieTableModel getMovieTableModel() {
+        return movieTableModel;
+    }
+
+    public BorrowTableModel getBorrowTableModel() {
+        return borrowTableModel;
+    }
+
+    public JTable getMovieTable() {
+        return movieTable;
+    }
 }
