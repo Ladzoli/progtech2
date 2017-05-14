@@ -7,6 +7,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableRowSorter;
 
 import movies.db.DataSource;
+import movies.db.DatabaseSetup;
 import movies.gui.MovieFrame;
 
 public class Boot {
@@ -18,6 +19,7 @@ public class Boot {
 
         try {
             DataSource.getInstance().getConnection().close();
+            DatabaseSetup.main(new String[]{});
             java.awt.EventQueue.invokeLater(() -> {
                 movieFrame = new MovieFrame();
             });
@@ -25,7 +27,7 @@ public class Boot {
             new Thread(() -> {
                 while(true) {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(5000);
                         System.out.println("Auto refresh");
                         movieFrame.getBorrowTableModel().reloadEntities();
                         movieFrame.getMovieTableModel().reloadEntities();
